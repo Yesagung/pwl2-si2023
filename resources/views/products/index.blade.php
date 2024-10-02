@@ -23,6 +23,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">IMAGE</th>
+                                    <th scope="col">SUPPLIER NAME</th>
                                     <th scope="col">TITLE</th>
                                     <th scope="col">CATEGORY</th>
                                     <th scope="col">PRICE</th>
@@ -34,14 +35,15 @@
                                 @forelse ($products as $product)
                                 <tr>
                                     <td class="text-center">
-                                        <img src="{{asset('/storage/products/'.$product->image) }}" class="rounded" width="150px" alt="">
+                                        <img src="{{asset('/storage/images/'.$product->image) }}" class="rounded" width="150px" alt="">
                                     </td>
+                                    <td>{{ $product->supplier_name }}</td>
                                     <td>{{ $product->title }}</td>
                                     <td>{{ $product->product_category_name }}</td>
-                                    <td>{{ "Rp". number_format($product->price,2,',','-') }}</td>
+                                    <td>{{ "Rp". number_format($product->price,2,',','.') }}</td>
                                     <td>{{ $product->stock }}</td>
                                     <td class="text-center">
-                                        <form onsubmit="return confirm('apakah anda yakin?');" action="{{ route('product.destroy', $product->id)}}" method="PDST">
+                                        <form onsubmit="return confirm('apakah anda yakin?');" action="{{ route('products.destroy', $product->id)}}" method="POST">
                                             <a href="{{ route('products.show', $product->id)}}" class= "btn btn-sn btn-dark">SHOW</a>
                                             <a href="{{ route('products.edit', $product->id)}}" class= "btn btn-sn btn-primary">EDIT</a>
                                             @csrf
